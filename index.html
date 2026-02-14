@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For My Favorite Person</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --accent: #800f2f;
+            --bg-gradient: linear-gradient(135deg, #fff5f7 0%, #ffe0e9 100%);
+            --glass: rgba(255, 255, 255, 0.75);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--accent);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Modern Minimal Nav */
+        .modern-nav {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 100px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .nav-name {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            font-size: 1.1rem;
+        }
+
+        /* Premium Letter Card */
+        .main-container {
+            padding-top: 100px;
+            padding-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .letter-card {
+            background: #ffffff;
+            padding: 2.5rem 2rem;
+            width: 90%;
+            max-width: 420px;
+            border-radius: 4px;
+            box-shadow: 0 20px 60px rgba(128, 15, 47, 0.08);
+            position: relative;
+        }
+
+        .handwritten {
+            font-family: 'Caveat', cursive;
+            font-size: 1.7rem;
+            line-height: 1.2;
+            color: #1a1a1a;
+        }
+
+        /* Responsive Buttons */
+        .action-zone {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            min-height: 120px;
+            width: 100%;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .btn-modern {
+            padding: 12px 30px;
+            border-radius: 100px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .btn-yes {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 10px 25px rgba(128, 15, 47, 0.25);
+            max-width: 85vw;
+            white-space: normal;
+            line-height: 1.4;
+        }
+
+        #noBtn {
+            background: white;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            z-index: 100;
+            touch-action: none;
+        }
+
+        /* Sleek Polaroid Grid */
+        .polaroid {
+            background: white;
+            padding: 10px 10px 15px 10px; /* Reduced bottom padding */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .polaroid img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+
+        .polaroid-caption {
+            font-family: 'Caveat', cursive;
+            font-size: 1.3rem;
+            text-align: center;
+            margin-top: 8px;
+            color: #333;
+        }
+
+        /* Fullscreen Victory Overlay */
+        #celebration-screen {
+            position: fixed;
+            inset: 0;
+            background: #ffffff;
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .victory-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-style: italic;
+            color: var(--accent);
+            text-align: center;
+            z-index: 10001;
+        }
+
+        .replay-btn {
+            position: absolute;
+            bottom: 40px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.4;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="modern-nav">
+        <span class="nav-name">To Dear Nupur!</span>
+    </nav>
+
+    <main class="main-container">
+        <div class="letter-card">
+            <div class="handwritten">
+                <p class="mb-3">Hey Beautiful,</p>
+                <p class="mb-3">I wanted to ask you something in a way that’s as unique as you are. You make everything better just by being there.</p>
+                <p class="mb-6 font-bold text-red-800">So... Will you be my Valentine?</p>
+                <p class="text-right italic">With all my love,<br>Your Fav : Rider Anurag</p>
+            </div>
+        </div>
+
+        <div class="action-zone">
+            <button id="yesBtn" class="btn-modern btn-yes">Yes! ❤️</button>
+            <button id="noBtn" class="btn-modern">No 🫢</button>
+        </div>
+    </main>
+
+    <section class="pb-20 pt-4 px-4">
+        <div class="container mx-auto max-w-lg">
+            <div class="grid grid-cols-2 gap-3">
+                <div class="polaroid rotate-1">
+                    <img src="C:\Users\ASUS\Downloads\1st Image.jpeg.jpeg">
+                    <p class="polaroid-caption">Where it began</p>
+                </div>
+                <div class="polaroid -rotate-1">
+                    <img src="C:\Users\ASUS\Downloads\2nd Image.jpeg.jpeg">
+                    <p class="polaroid-caption">Laughing always</p>
+                </div>
+                <div class="polaroid -rotate-2">
+                    <img src="C:\Users\ASUS\Downloads\3rd image.jpeg.jpeg">
+                    <p class="polaroid-caption">Favorite day</p>
+                </div>
+                <div class="polaroid rotate-2">
+                    <img src="C:\Users\ASUS\Downloads\WhatsApp Image 2026-02-14 at 4.11.13 PM.jpeg">
+                    <p class="polaroid-caption">Just us</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<div id="celebration-screen">
+        <div class="victory-text">Yayyy !!!</div>
+        <p class="text-xs tracking-[0.3em] font-bold uppercase mt-4 text-pink-500">Bestest Decision Ever !!!!</p>
+        <button onclick="location.reload()" class="replay-btn">Replay Moment</button>
+    </div>
+
+    <audio id="loveSong" loop>
+        <source src="./valentines.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const screen = document.getElementById('celebration-screen');
+        const loveSong = document.getElementById('loveSong');
+        
+        let yesScale = 1;
+        const messages = [
+            "Sure?", "Really?", "Pookie please!", "Think again!", "Click YES!",
+            "I'll buy you food!", "Don't be mean!", "I'll give you my hoodie!",
+            "I'm gonna cry...", "Wait, think about it!", "Last chance!", 
+            "Look at my face 🥺", "Don't do this to me!", "Error: Choice not allowed", 
+            "JUST CLICK YES!", "I'm still waiting...", "You're kidding!", "Okay, you're teasing!",
+            "My heart is breaking!", "Please? ❤️"
+        ];
+        let msgIdx = 0;
+
+        // Interaction Logic
+        const handleNo = (e) => {
+            if(e.type === 'touchstart') e.preventDefault();
+
+            // 1. Text changes EVERY time
+            yesBtn.innerText = messages[msgIdx % messages.length];
+            msgIdx++;
+
+            // 2. Growth stops at 2.2 for mobile safety
+            if (yesScale < 2.2) {
+                yesScale += 0.25;
+                yesBtn.style.transform = `scale(${yesScale})`;
+            }
+
+            // 3. No button teleports
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 40) + 20;
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 40) + 20;
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        };
+
+        noBtn.addEventListener('mouseover', handleNo);
+        noBtn.addEventListener('touchstart', handleNo);
+
+        // Celebration Logic
+        yesBtn.addEventListener('click', () => {
+            loveSong.play().catch(() => console.log("Audio needs interaction"));
+            screen.style.display = 'flex';
+
+            const end = Date.now() + (60 * 1000); // 1 minute of sprinkles
+            const colors = ['#800f2f', '#ff4d6d', '#ffccd5', '#ffffff'];
+
+            (function frame() {
+                // High-visibility falling sprinkles
+                confetti({
+                    particleCount: 5,
+                    angle: 90,
+                    spread: 360,
+                    origin: { x: Math.random(), y: -0.2 },
+                    colors: colors,
+                    scalar: 2.2, // Big and visible
+                    gravity: 0.7,
+                    zIndex: 10005 
+                });
+
+                // Heart bursts
+                if(Math.random() > 0.85) {
+                    confetti({
+                        particleCount: 1,
+                        origin: { x: Math.random(), y: -0.1 },
+                        colors: ['#800f2f'],
+                        shapes: ['heart'],
+                        scalar: 2.8,
+                        zIndex: 10005
+                    });
+                }
+
+                if (Date.now() < end) requestAnimationFrame(frame);
+            }());
+        });
+    </script>
+</body>
+</html>
